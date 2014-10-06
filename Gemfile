@@ -6,3 +6,4 @@ gem 'rails', '4.1.4'
 gem 'pg'
 gem 'stathat'
 
+gem 'dotenv-rails', groups: [:development, :test]
