@@ -1,10 +1,10 @@
 class StatHatSender
 
-  def initialize(stat_name, user_token, stat_value, event_type)
-    @stat_name = stat_name
+  def initialize(json, user_token)
     @user_token = user_token
-    @stat_value = stat_value
-    @event_type = event_type
+    @stat_name = json['stat_name']
+    @stat_value = json['stat_value']
+    @event_type = json['event_type']
   end
 
   def send!

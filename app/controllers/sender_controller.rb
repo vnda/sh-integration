@@ -1,15 +1,17 @@
 class SenderController < ActionController::Base
-  before_action :set_json
+  before_action :set_user_and_json
 
   def send_stat_hat
-    if @json
-      StatHatSender.new(@json).send!
+    if @user_token && @json
+      StatHatSender.new(@json, @user_token).send!
     end
       render json: 'ok'
   end
 
   private
-    def set_json
+
+    def set_user_and_json
+      @user_token = params["user_token"]
       @json = JSON.parse(request.body.read)
     end
 
