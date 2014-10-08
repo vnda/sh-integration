@@ -15,7 +15,7 @@ class StatHatSender
     when 'confirmed'
       @count_stat_name = "Pedidos confirmados - Total"
       @value_stat_name = "Pedidos confirmados - Valor"
-    when 'cancelled'
+    when 'canceled'
       @count_stat_name = "Pedidos cancelados - Total"
       @value_stat_name = "Pedidos cancelados - Valor"
     end
