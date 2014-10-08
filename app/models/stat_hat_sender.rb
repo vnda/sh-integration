@@ -2,16 +2,24 @@ class StatHatSender
 
   def initialize(json, user_token)
     @user_token = user_token
-    @stat_name = json['stat_name']
-    @stat_value = json['stat_value']
-    @event_type = json['event_type']
+    @status = json['status']
+    @stat_value = json['total']
+
   end
 
   def send!
-    case @event_type
-    when 'value' then StatHat::API.ez_post_value(@stat_name, @user_token, @stat_value)
-    when 'count' then StatHat::API.ez_post_count(@stat_name, @user_token, @stat_value)
+    case @status
+    when 'received'
+      @count_stat_name = "Pedidos recebidos - Total"
+      @value_stat_name = "Pedidos recebidos - Valor"
+    when 'confirmed'
+      @count_stat_name = "Pedidos confirmados - Total"
+      @value_stat_name = "Pedidos confirmados - Valor"
+    when 'cancelled'
+      @count_stat_name = "Pedidos cancelados - Total"
+      @value_stat_name = "Pedidos cancelados - Valor"
     end
-  end
-
+    StatHat::API.ez_post_count(@count_stat_name, @user_token, 1)
+    StatHat::API.ez_post_value(@value_stat_name, @user_token, @stat_value)
+    end
 end
